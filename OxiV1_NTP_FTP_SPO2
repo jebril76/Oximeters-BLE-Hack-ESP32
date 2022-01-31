@@ -2,7 +2,7 @@
  * A BLE client example that is rich in capabilities.
  * There is a lot new capabilities implemented.
  * author unknown
- * updated by chegewara
+ * updated by chegewara and Jebril
  */
 
 #include "BLEDevice.h"
@@ -38,7 +38,7 @@ static BLERemoteCharacteristic* pRemoteCharacteristicDeviceData;
 static BLEAdvertisedDevice* myDevice;
 static unsigned int connectionTimeMs = 0;
 char filename[21];
-const int maxdata = 14400;
+const int maxdata = 72000;
 const int offdata = 1084;
 unsigned char myData[maxdata];
 int dataptr=offdata;
@@ -68,16 +68,16 @@ static void notifyCallback(
       myStore[1]=floor(10*pData[5]/256);
     }
     if (pData[3]==0x00) {
-      myStore[2]=0x7f;    
-    }
-    else {
-      myStore[2]=pData[3];
-    }
-    if (pData[1]==0x00) {
       myStore[3]=0xff;    
     }
     else {
-      myStore[3]=pData[1];
+      myStore[3]=pData[3];
+    }
+    if (pData[1]==0x00) {
+      myStore[2]=0x7f;    
+    }
+    else {
+      myStore[2]=pData[1];
     }
   }
 }
